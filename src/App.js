@@ -1,12 +1,15 @@
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Forms from './components/Form';
-import classes from "./App.module.css";
+import Home from './pages/Home';
 
 function App() {
   return (
-    <>
-    <h2 className={classes.h2}>Sign Up</h2>
-    <Forms/>
-    </>
+    <Router>
+      <Routes>
+        <Route path='/' element={<Forms/>}/>
+        <Route path='/home' element={<Home/>}/>
+      </Routes>
+    </Router>
   );
 }
 
