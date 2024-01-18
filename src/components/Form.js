@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import Token from "../Store/TokenContext";
 
 const Forms = () => {
   const navigate=useNavigate();
+  const tokk=useContext(Token);
+
   const [sign, setSign] = useState(false);
 
   const email_id = useRef(null);
@@ -54,7 +57,7 @@ const Forms = () => {
     );
     const data=await res.json();
     const token=data.idToken;
-    console.log(token);
+    tokk.setContextToken(token);
     navigate("/home");
   };
 
