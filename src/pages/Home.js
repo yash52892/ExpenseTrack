@@ -8,16 +8,18 @@ const Home = () => {
     const nav=useNavigate();
 
     const handleEmailverify=async()=>{
-        await fetch("https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyBLAYe2M0Gf_twVPGDmlWvNQpbMyvtkLYs",{
+        const res=await fetch("https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyBLAYe2M0Gf_twVPGDmlWvNQpbMyvtkLYs",{
             method:"POST",
             body: JSON.stringify({
-                "idToken": tokk.token,
-                "requestType":"VERIFY_EMAIL"
+                idToken: tokk.token,
+                requestType :"VERIFY_EMAIL"
             }),
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
               },
         })
+        const data=await res.json();
+        console.error(data.error.message);
     }
 
     const handleLogout=()=>{
