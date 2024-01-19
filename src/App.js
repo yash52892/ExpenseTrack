@@ -19,6 +19,7 @@ function App() {
          (<Navigate replace to="/" element={ <Forms />}/>)}/>
          <Route path='/user' element={tok.isLoggedin ? (<User/>):
          (<Navigate replace to="/" element={ <Forms />}/>)}/>
+          <Route path='/forgot' element={<Forgot/>}/>
       </Routes>
     </Router>
   );
