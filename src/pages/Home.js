@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import Token from "../Store/TokenContext";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
     const tokk=useContext(Token);
+    const nav=useNavigate();
+
     const handleEmailverify=async()=>{
         await fetch("https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyBLAYe2M0Gf_twVPGDmlWvNQpbMyvtkLYs",{
             method:"POST",
@@ -15,6 +18,11 @@ const Home = () => {
                 "Content-Type": "application/json;charset=utf-8",
               },
         })
+    }
+
+    const handleLogout=()=>{
+        localStorage.removeItem("id");
+        nav("/");
     }
 
   return (
@@ -63,12 +71,14 @@ const Home = () => {
               </Link>
             </div>
             <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+            <button onClick={handleLogout}>
               <Link
                 to="/"
                 class="text-sm font-semibold leading-6 text-gray-900"
               >
                 Log out <span aria-hidden="true">&rarr;</span>
               </Link>
+              </button>
             </div>
           </nav>
         </header>
