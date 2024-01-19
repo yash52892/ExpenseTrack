@@ -35,7 +35,7 @@ const Forms = () => {
   };
 
   const handleclick=()=>{
-    setSign(true);
+    setSign((o)=>!o);
   }
 
   const handlesignin = async (e) => {
@@ -58,6 +58,7 @@ const Forms = () => {
     const data=await res.json();
     const token=data.idToken;
     tokk.setContextToken(token);
+    localStorage.setItem("id",token);
     navigate("/home");
   };
 
@@ -160,6 +161,11 @@ const Forms = () => {
               {sign ? (<p></p>): (<p className="mt-10 text-center text-sm text-gray-500">
               Already a member?{" "}
               <button onClick={handleclick}> Log In
+              </button>
+            </p>)}
+            {!sign ? (<p></p>): (<p className="mt-10 text-center text-sm text-gray-500">
+              Not a member?{" "}
+              <button onClick={handleclick}> Sign up
               </button>
             </p>)}
             </div>
