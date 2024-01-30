@@ -3,10 +3,13 @@ import ExpenseData from "./ExpenseData";
 const ExpenseDetails = (props) => {
   const expItems = props.items.map((item) => (
     <ExpenseData
+      key={item.id}
+      id={item.id}
       title={item.title}
       amount={item.amount}
       desp={item.desp}
       cat={item.cat}
+      getUpdateddata={props.getUpdated}
     />
   ));
   return (
