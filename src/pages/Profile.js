@@ -1,10 +1,8 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import Token from "../Store/TokenContext";
+import { useEffect, useRef, useState } from "react";
+import {useSelector} from 'react-redux';
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
-
-    
   const[n, setName]=useState(null);
   const[url,setUrl]=useState(null);
 
@@ -13,7 +11,7 @@ const Profile = () => {
 
   const navigate=useNavigate();
 
-  const tokk = useContext(Token);
+  const tokid=useSelector(state=>state.auth.id);
 
   useEffect( ()=>{
     const fetching= async ()=>{
@@ -21,7 +19,7 @@ const Profile = () => {
         {
             method:"POST",
             body: JSON.stringify({
-                idToken: tokk.token
+                idToken: tokid
             })
         });
         const data=await result.json();
@@ -29,16 +27,16 @@ const Profile = () => {
         setUrl(data.users[0].photoUrl);
       };
       fetching();
-  },[])
+  },[tokid])
 
   const handleprofile = async (event) => {
     event.preventDefault();
-    const res = await fetch(
+    await fetch(
       "https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyBLAYe2M0Gf_twVPGDmlWvNQpbMyvtkLYs",
       {
         method: "POST",
         body: JSON.stringify({
-          idToken: tokk.token,
+          idToken: tokid,
           displayName: Dname.current.value,
           photoUrl: photo.current.value,
           returnSecureToken: true,
