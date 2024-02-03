@@ -1,12 +1,15 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import Token from "../../Store/TokenContext";
+import { useDispatch } from 'react-redux';
+import authActions from "../../Redux/Slice/expense";
+
 
 const Forms = () => {
   const navigate=useNavigate();
-  const tokk=useContext(Token);
+
+  const dispatch=useDispatch();
 
   const [sign, setSign] = useState(false);
 
@@ -57,7 +60,8 @@ const Forms = () => {
     );
     const data=await res.json();
     const token=data.idToken;
-    tokk.setContextToken(token);
+    console.log(token);
+    dispatch(authActions.login(token));
     localStorage.setItem("id",token);
     navigate("/home");
   };
