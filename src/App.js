@@ -1,28 +1,35 @@
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Forms from './components/Authentication/Form';
-import Home from './pages/Home';
-import Profile from './pages/Profile';
-import {useSelector} from 'react-redux';
-import User from './pages/User';
-import Forgot from './components/Authentication/Forgot';
-import ExpenseForm from './components/Expense/ExpenseForm';
-
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
+import Forms from "./components/Authentication/Form";
+import Home from "./pages/Home";
+import Profile from "./pages/Profile";
+import { useSelector } from "react-redux";
+import User from "./pages/User";
+import Forgot from "./components/Authentication/Forgot";
+import ExpenseForm from "./components/Expense/ExpenseForm";
+import Layout from "./pages/Layout";
 
 function App() {
+  
+  const { darkMode } = useSelector((state) => state.mode);
+  const tok = useSelector((state) => state.auth.isLogged);
 
-  const tok= useSelector(state=>state.auth.isLogged);
+  
   return (
     <Router>
       <Routes>
-        <Route path='/' element={tok ? (<Home/>) :
-           (<Navigate replace to="/" element={ <Forms />}/>)}/>
-        <Route path='/profile' element={tok ? (<Profile/>):
-         (<Navigate replace to="/" element={ <Forms />}/>)}/>
-         <Route path='/user' element={tok ? (<User/>):
-         (<Navigate replace to="/" element={ <Forms />}/>)}/>
-         <Route path='/expense' element={tok ? (<ExpenseForm/>):
-         (<Navigate replace to="/" element={ <Forms />}/>)}/>
-         <Route path='/forgot' element={<Forgot/>}/>
+        <Route path="/sign" element={<Forms/>}></Route>
+        <Route path="/" element={tok ? <Layout /> : <Navigate to="/sign"/>}>
+          <Route path="/home" element={tok ? <Home /> : <Navigate to="/sign"/>}/>
+          <Route path="/profile" element={tok ? <Profile /> : <Navigate to="/sign"/>}/>
+          <Route path="/user" element={tok ? <User /> : <Navigate to="/sign"/>}/>
+          <Route path="/expense" element={tok ? (<ExpenseForm />) : (<Navigate to="/sign" />)}/>
+          <Route path="/forgot" element={<Forgot />} />
+        </Route>
       </Routes>
     </Router>
   );
