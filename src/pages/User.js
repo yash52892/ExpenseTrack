@@ -11,6 +11,12 @@ const User = () => {
         <h4 class="mb-2 block font-sans text-2xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
           Natalie Paisley
         </h4>
+        <h5 class="mb-2 block font-sans text-2xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+          Age: 12
+        </h5>
+        <h6 class="mb-2 block font-sans text-2xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+          Female
+        </h6>
       </div>
     </div>
   );
