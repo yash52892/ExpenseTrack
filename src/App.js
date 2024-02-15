@@ -7,18 +7,14 @@ import {
 import Forms from "./components/Authentication/Form";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
-import { useSelector } from "react-redux";
 import User from "./pages/User";
 import Forgot from "./components/Authentication/Forgot";
 import ExpenseForm from "./components/Expense/ExpenseForm";
 import Layout from "./pages/Layout";
 
 function App() {
-  
-  const { darkMode } = useSelector((state) => state.mode);
-  const tok = useSelector((state) => state.auth.isLogged);
+  const tok = localStorage.getItem("id");
 
-  
   return (
     <Router>
       <Routes>
